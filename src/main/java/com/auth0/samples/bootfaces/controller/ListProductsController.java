@@ -20,7 +20,8 @@ import java.util.List;
 public class ListProductsController {
 	@Autowired
 	private ProductRepository productRepository;
-
+	@Autowired
+	private ProductController productController;
 	private List<Product> products;
 
 	@Deferred
@@ -32,6 +33,24 @@ public class ListProductsController {
 
 	public List<Product> getProducts() {
 		return products;
+	}
+
+	public String create() {
+		productController.setViewMode(false);
+		productController.setProduct(new Product());
+		return "/product/product-form.xhtml?faces-redirect=true";
+	}
+
+	public String view(Product product) {
+		productController.setViewMode(true);
+		productController.setProduct(product);
+		return "/product/product-form.xhtml?faces-redirect=true";
+	}
+
+	public String edit(Product product) {
+		productController.setViewMode(false);
+		productController.setProduct(product);
+		return "/product/product-form.xhtml?faces-redirect=true";
 	}
 
 	public String delete(Product product) {

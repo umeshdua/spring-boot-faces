@@ -10,33 +10,46 @@
 
 	<ui:define name="content">
 		<h:form id="form">
-			<p:panel header="Products List">
-				<p:dataTable id="table" var="product" value="#{listProducts.products}">
-					<p:column>
-						<f:facet name="header"># Id</f:facet>
-						<h:outputText value="#{product.id}" />
-					</p:column>
-
-					<p:column>
-						<f:facet name="header">Name</f:facet>
-						<h:outputText value="#{product.name}" />
-					</p:column>
-
-					<p:column>
-						<f:facet name="header">Price</f:facet>
-						<h:outputText value="#{product.price}">
-							<f:convertNumber type="currency" currencySymbol="$ " />
-						</h:outputText>
-					</p:column>
-
-					<p:column>
-						<f:facet name="header">Action</f:facet>
-						<h:commandButton id="delete-button"
-										 action="#{listProducts.delete(product)}"
-										 value="Delete" />
-					</p:column>
-				</p:dataTable>
-			</p:panel>
+			<div class="ui-g">
+				<div class="ui-g-12">
+					<p:growl for="errors" showDetail="true" autoUpdate="true"/>
+				</div>
+				<div class="ui-g-12">
+					<p:toolbar>
+						<f:facet name="right">
+							<h:commandButton id="create-button" action="#{listProducts.create}" value="New Product" />
+						</f:facet>
+					</p:toolbar>
+				</div>
+				<p:panel header="Products List">
+					<p:dataTable id="table" var="product" value="#{listProducts.products}">
+						<p:column>
+							<f:facet name="header"># Id</f:facet>
+							<h:outputText value="#{product.id}" />
+						</p:column>
+	
+						<p:column>
+							<f:facet name="header">Name</f:facet>
+							<h:outputText value="#{product.name}" />
+						</p:column>
+	
+						<p:column>
+							<f:facet name="header">Price</f:facet>
+							<h:outputText value="#{product.price}">
+								<f:convertNumber type="currency" currencySymbol="$ " />
+							</h:outputText>
+						</p:column>	
+						<p:column>
+							<f:facet name="header">Action</f:facet>
+							<h:commandButton id="view-button" action="#{listProducts.view(product)}" value="View" />
+							<h:commandButton id="edit-button" action="#{listProducts.edit(product)}" value="Edit" />
+							<h:commandButton id="delete-button"
+											 action="#{listProducts.delete(product)}"
+											 value="Delete" />
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</div>
 		</h:form>
 	</ui:define>
 

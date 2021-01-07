@@ -17,14 +17,29 @@ public class ProductController {
 	private ProductRepository productRepository;
 
 	private Product product = new Product();
+	private boolean viewMode;
 
 	public String save() {
 		productRepository.save(product);
-		product = new Product();
+		return "/product/product-list.xhtml?faces-redirect=true";
+	}
+
+	public String cancel() {
 		return "/product/product-list.xhtml?faces-redirect=true";
 	}
 
 	public Product getProduct() {
 		return product;
 	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public boolean isViewMode() {
+		return viewMode;
+	}
+	public void setViewMode(boolean viewMode) {
+		this.viewMode = viewMode;
+	}	
 }
